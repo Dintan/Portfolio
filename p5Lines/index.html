@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="utf-8">
+    <title>P5Lines</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.js"></script>
+
+
+    <style>
+        body {
+            background-color: #FEE8E8;
+
+
+        }
+
+        #mainWrapper {
+            width: 944px;
+            height: 1416px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: repeat(5, 1fr);
+            column-gap: 55px;
+
+        }
+
+        #mainHeader {
+            grid-column: 1/4;
+            grid-row: 1/2;
+            background-color: crimson;
+
+        }
+
+        #mainBody {
+            grid-column: 1/4;
+            grid-row: 2/5;
+            background-color: rgb(212, 126, 143);
+
+
+        }
+
+        #mainFooter {
+            grid-column: 1/4;
+            grid-row: 5/6;
+            background-color: rgb(214, 171, 180);
+
+        }
+
+        #mainProyect {
+            z-index: 1;
+            grid-column: 1/4;
+            grid-row: 2/5;
+            padding: 50px;
+
+
+        }
+
+
+
+        #title {
+            color: darksalmon;
+            font-weight: bold;
+            font-family: sans-serif;
+            font-size: 100px;
+            padding: 70px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+
+        }
+
+        #text {
+            color: black;
+            font-weight: lighter;
+            font-family: sans-serif;
+            font-size: 20px;
+            margin-left: 70px;
+            margin-right: 70px;
+            padding: 70px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center
+        }
+
+        canvas {
+            z-index: 1;
+            align-self: center;
+            margin: auto;
+
+            grid-column: 2/3;
+            grid-row: 2/5;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            border: 1px solid black;
+
+
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <main id="mainWrapper">
+        <div id="mainHeader">
+            <div id="title">P5 "LINES"</div>
+
+        </div>
+
+        <div id="mainBody">
+            <script id="mainProyect">
+                const randomLine = p => {
+
+
+
+                    p.setup = function () {
+                        p.createCanvas(845, 700);
+                        p.strokeWeight(1);
+                        p.smooth();
+                    }
+
+                    p.draw = function () {
+                        p.clear();
+
+                        for (var i = 0; i < p.mouseX; i++) {
+                            p.stroke(p.random(255), 100);
+                            p.line(i, 0, p.random(0, p.mouseX), p.height);
+                        }
+                    }
+
+
+
+
+
+                }
+
+
+                new p5(randomLine, "proyecto8");
+
+            </script>
+
+        </div>
+
+
+
+
+
+        <div id="mainFooter">
+            <div id="text">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean bibendum tortor non facilisis ultrices.
+                Morbi luctus euismod mi sit amet cursus. Phasellus et ultrices ipsum. Nunc elementum ante lectus, quis
+                accumsan libero vestibulum nec. Maecenas nec mattis lacus. Proin tempus lacinia interdum. Donec sed arcu
+                a tellus pellentesque imperdiet. Donec a justo eu urna pretium bibendum ut non dolor. Donec volutpat
+                porta ante, nec tincidunt tortor congue eu. Nulla ultricies massa ut vehicula porttitor. Phasellus
+                ultricies ullamcorper felis nec molestie. Integer interdum, arcu non suscipit aliquam, metus libero
+                posuere justo, quis hendrerit massa purus eu quam. Nunc pellentesque nulla eget feugiat sagittis. Sed
+                orci eros, ultrices id scelerisque vel, feugiat eget augue. Duis tincidunt sapien ac nisi tincidunt
+                feugiat. Aenean et sollicitudin mi.</div>
+        </div>
+
+
+
+
+    </main>
+
+</body>
+
+
+</html>

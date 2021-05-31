@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="utf-8">
+    <title>Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"
+        integrity="sha512-cdV6j5t5o24hkSciVrb8Ki6FveC2SgwGfLE31+ZQRHAeSRxYhAQskLkq3dLm8ZcWe1N3vBOEYmmbhzf7NTtFFQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.js"></script>
+    <script src="https://cdn.vectorly.io/upscaler/v2/latest/vectorly-videojs.js"></script>
+
+
+
+    <style>
+        body {
+            background-color: #FEE8E8;
+
+        }
+
+        #mainWrapper {
+            width: 944px;
+            height: 1416px;
+            background-color: #FF8787;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: repeat(13, 1fr);
+            column-gap: 55px;
+            row-gap: 12px;
+            padding: 0px 24px;
+            position: relative;
+
+
+        }
+
+        #expandedWrapper {
+            z-index: 1;
+            width: 944px;
+            height: 1416px;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: repeat(5, 1fr);
+            column-gap: 55px;
+            row-gap: 12px;
+        }
+
+
+
+        #fotoFondo {
+            position: absolute;
+            right: 0px;
+            top: 60px;
+            height: 1320px;
+            mix-blend-mode: overlay;
+
+
+
+        }
+
+        .proyecto {
+            /*background-color: grey;*/
+            cursor: pointer;
+            z-index: 1;
+            overflow: hidden;
+
+
+        }
+
+        #proyecto1 {
+            grid-column: 1/2;
+            grid-row: 2/3;
+
+            object-fit: cover;
+
+
+        }
+
+        #proyecto2 {
+            grid-column: 1/2;
+            grid-row: 3/5;
+
+        }
+
+        #proyecto3 {
+            grid-column: 1/2;
+            grid-row: 4/5;
+        }
+
+        #proyecto4 {
+            grid-column: 1/2;
+            grid-row: 6/7;
+        }
+
+        #proyecto5 {
+            grid-column: 1/2;
+            grid-row: 7/8;
+        }
+
+        #proyecto6 {
+            grid-column: 1/2;
+            grid-row: 10/11;
+        }
+
+        #proyecto6 {
+            grid-column: 1/2;
+            grid-row: 11/12;
+        }
+
+        #proyecto7 {
+            grid-column: 1/2;
+            grid-row: 12/13;
+        }
+
+        #proyecto8 {
+            grid-column: 2/3;
+            grid-row: 2/3;
+
+            object-fit: cover;
+
+
+        }
+
+        #proyecto9 {
+            grid-column: 2/3;
+            grid-row: 3/4;
+
+            height: 97px;
+
+        }
+
+        #proyecto10 {
+            grid-column: 4/5;
+            grid-row: 6/8;
+        }
+
+        #proyecto13 {
+            grid-column: 4/5;
+            grid-row: 8/11;
+
+            object-fit: cover;
+
+        }
+
+
+
+        #proyecto12 {
+            margin-top: 30px;
+            margin-left: 45px;
+            grid-column: 2/3;
+            grid-row: 11/13;
+        }
+
+
+        #dan {
+            grid-column: 1/3;
+            grid-row: 5/7;
+            font-weight: 600;
+            font-family: sans-serif;
+            font-size: 113px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            margin-top: 30px;
+
+        }
+
+        #portafolio {
+            grid-column: 1/4;
+            grid-row: 8/10;
+            font-weight: bold;
+            font-family: sans-serif;
+            font-size: 169px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        #fotos {
+
+            height: auto;
+            width: 100%;
+            transition: transform .2s;
+
+            object-fit: cover;
+
+        }
+
+        #fotosBig {
+            height: auto;
+            width: 100%;
+
+        }
+
+        #fotosLarge {
+            height: auto;
+            width: 100%;
+        }
+
+        #video {
+            height: 205px;
+            width: 205px;
+        }
+
+
+        img {
+            object-fit: cover;
+
+        }
+
+        .hyperLink {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 24px;
+            height: auto;
+            cursor: pointer;
+            z-index: 20;
+
+        }
+
+        .openProyect {
+            position: relative;
+        }
+
+        canvas {
+            border: 1px solid black;
+
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <main id="mainWrapper">
+        <img id="fotoFondo" src="img/2.jpg">
+
+        <div id="proyecto1" class="openProyect">
+            <img class="hyperLink" src="externalLink.svg" data-link="./p5BlackHole">
+            <script id="fotos">
+
+                const circleLine = p => {
+
+                    var rotation;
+
+                    var maxSize;
+
+                    var minSize;
+
+                    var currSize;
+
+                    var ease;
+
+                    p.setup = function () {
+                        initializeFields();
+                        p.createCanvas(194, 97);
+                        p.noFill();
+                        p.stroke(255, 255, 255, 126);
+                    }
+
+                    p.draw = function () {
+                        p.clear();
+                        p.fill(0, 0, 0, 20);
+                        if (p.mouseIsPressed) {
+                            currSize += ((maxSize - currSize) * ease);
+                            drawBlackHole(p.width / 2, p.height / 2, currSize);
+                        }
+                    }
+
+                    function drawBlackHole(x, y, createCanvas) {
+                        p.translate(x, y);
+                        for (var i = 0; i < 10; i++) {
+                            rotation += p.random(0.05, 0.1);
+                            p.rotate(rotation);
+                            p.ellipse(0, 0, p.random(1, 300 * createCanvas), 400 * createCanvas);
+                            p.rotate(rotation + 90);
+                            p.ellipse(0, 0, p.random(1, 300 * createCanvas), 400 * createCanvas);
+                        }
+                        // saveFrame("BlackHole####.png");
+                    }
+
+                    p.mouseReleased = function () {
+                        currSize = minSize;
+                    }
+
+                    function initializeFields() {
+                        rotation = 0;
+                        maxSize = 0.5;
+                        minSize = 0.1;
+                        currSize = 0.1;
+                        ease = 0.1;
+                    }
+
+                }
+
+                new p5(circleLine, "proyecto1");
+
+            </script>
+        </div>
+
+
+        <div id="proyecto2" class="openProyect">
+            <img class="hyperLink" src="externalLink.svg" data-link="./codeMusic">
+
+            <video controls>
+                <source src="vid/songVid.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <img id="proyecto4" class="proyecto"></div>
+
+        <div id="proyecto5" class="proyecto"></div>
+
+        <div id="proyecto6" class="openProyect">
+            <img class="hyperLink" src="externalLink.svg" data-link="./spaceRace">
+
+            <video controls width="100%">
+                <source src="vid/spaceRace(1).mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div id="proyecto7" class="openProyect">
+            <img class="hyperLink" src="externalLink.svg" data-link="./shootItem">
+
+            <video controls width="100%">
+                <source src="vid/shootItem(1).mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div id="proyecto8" class="openProyect">
+            <img class="hyperLink" src="externalLink.svg" data-link="./p5lines">
+
+            <script id="fotos">
+
+                const randomLine = p => {
+
+
+
+                    p.setup = function () {
+                        p.createCanvas(194, 97);
+                        p.smooth();
+                        p.strokeWeight(1);
+                    }
+
+                    p.draw = function () {
+                        p.clear();
+
+                        for (var i = 0; i < p.mouseX; i++) {
+                            p.stroke(p.random(255), 100);
+                            p.line(i, 0, p.random(0, p.mouseX), p.height);
+                        }
+                    }
+
+
+
+
+
+                }
+
+
+                new p5(randomLine, "proyecto8");
+
+            </script>
+        </div>
+
+        <div id="proyecto9" class="openProyect">
+            <img class="hyperLink" src="externalLink.svg" data-link="./p5Rect">
+
+            <script id="fotos">
+
+                const randomSaturation = p => {
+
+                    var x;
+
+                    var BALLS;
+
+                    var xPositions;
+
+                    var yPositions;
+
+                    var xSpeeds;
+
+                    var ySpeeds;
+
+                    var sizes;
+
+                    var colors;
+
+                    p.setup = function () {
+                        initializeFields();
+                        p.createCanvas(194, 97);
+                        p.strokeWeight(1);
+                        p.resetApp();
+                        p.noFill();
+                        p.rectMode(p.CENTER);
+                        p.frameRate(12);
+                    }
+
+                    p.draw = function () {
+                        p.clear();
+                        p.fill(0, 0, 0, 20);
+                        for (var i = 0; i < BALLS; i++) {
+                            p.fill(colors[i]);
+                            p.rect(xPositions[i], yPositions[i], sizes[i], sizes[i]);
+                            var radius = sizes[i] + 0.5;
+                            if (xPositions[i] < radius || xPositions[i] > p.width - radius) {
+                                // rebota x
+                                xSpeeds[i] *= -1;
+                            }
+                            if (yPositions[i] < radius || yPositions[i] > p.height - radius) {
+                                // rebota y
+                                ySpeeds[i] *= -1;
+                            }
+                            sizes[i] += 0.1;
+                        }
+                    }
+
+
+                    p.resetApp = function () {
+                        for (var i = 0; i < BALLS; i++) {
+                            xPositions[i] = p.random(p.width);
+                            yPositions[i] = p.random(p.height);
+                            xSpeeds[i] = p.random(-10, 10);
+                            ySpeeds[i] = p.random(-10, 10);
+                            sizes[i] = p.random(0, 10);
+                            colors[i] = p.color(255);
+                        }
+                    }
+
+                    p.mousePressed = function () {
+                        p.resetApp();
+
+                    }
+
+                    function initializeFields() {
+                        x = 0;
+                        BALLS = 100;
+                        xPositions = new Array(BALLS);
+                        yPositions = new Array(BALLS);
+                        xSpeeds = new Array(BALLS);
+                        ySpeeds = new Array(BALLS);
+                        sizes = new Array(BALLS);
+                        colors = new Array(BALLS);
+                    }
+
+
+
+
+
+                }
+
+
+                new p5(randomSaturation, "proyecto9");
+
+            </script>
+
+        </div>
+
+        <div id="proyecto10" class="openProyect">
+            <img class="hyperLink" src="externalLink.svg" data-link="./boxOffice">
+            <img id="fotosBig" src="img/boxOffice.png" width="100%">
+        </div>
+
+        <div id="proyecto13" class="openProyect">
+            <img class="hyperLink" src="externalLink.svg" data-link="./personM">
+            <img id="fotosLarge" src="img/personM.png" width="100%">
+        </div>
+
+        <div id="proyecto12" class="openProyect">
+            <img class="hyperLink" src="externalLink.svg" data-link="./cardGame">
+            <img src="img/cardGame.png">
+
+        </div>
+
+
+        <div id="dan">Dan</div>
+
+        <div id="portafolio">
+            <div style="margin-bottom: -60px; position:relative; left: 75px; bottom: 30px;">port-</div>
+            <div style="margin-bottom: -20px;position:relative; left: -120px;">folio</div>
+        </div>
+
+
+
+
+
+    </main>
+
+    <script>
+        $(document).ready(function () {
+            $(".proyecto").click(function () {
+                /* $(this).css("grid-column", "1/5")
+                 $(this).css("grid-row", "2/12")*/
+                gsap.to(this, { "grid-column": "1/5", "grid-row": "2/12", duration: 2 });
+
+
+            })
+
+            $(".hyperLink").click(function () {
+
+                var urlProyecto = $(this).data("link")
+                window.open(urlProyecto, "_self");
+
+
+            })
+        })
+
+
+
+    </script>
+
+
+</body>
+
+
+</html>
